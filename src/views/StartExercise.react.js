@@ -86,13 +86,11 @@ const StartExercise = (props) => {
   const endExercise = () => {
     if (context.session.userId === "guest") {
       setNavLink(Page.exercise.link_path + ExerciseParam.fresh);
-
       return;
     }
 
     if (transcript.length === 0) {
       setNavLink(Page.exercise.link_path + ExerciseParam.restart);
-
       return;
     }
 
@@ -110,9 +108,6 @@ const StartExercise = (props) => {
       .catch((err) => AxiosErrors(err));
   };
 
-  if (!context.session.userId) {
-    return <Navigate to={Page.login.link_path} />;
-  }
   if (navLink) {
     return <Navigate to={navLink} />;
   }

@@ -55,7 +55,7 @@ export default class App extends Component {
                 element={<EditExercise />}
               />
               <Route path={Page.reports.route_path} element={<Reports />} />
-
+              <Route path={Page.report.route_path} element={<Reports />} />
               {/* <EditExercise path="editexercise/:id" />              
               <Reports path="reports/:report/:param" />  
               <Reports path="reports" />   */}

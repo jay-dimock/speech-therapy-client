@@ -13,7 +13,6 @@ export default class LoginGuest extends Component {
   static contextType = SessionContext;
 
   clickHandler = () => {
-    console.log("handlingcliuck");
     this.context.setSession({
       userId: GUEST_ID,
       firstName: GUEST_NAME,

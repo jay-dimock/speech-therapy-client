@@ -4,9 +4,6 @@ import SessionContext from "../util/SessionContext";
 
 export default class Logout extends Component {
   static contextType = SessionContext;
-  // shouldComponentUpdate() {
-  //   return false;
-  // }
   componentDidMount() {
     this.context.setSession({});
   }

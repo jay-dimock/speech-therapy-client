@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Button, Link, Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import SessionContext from "../util/SessionContext";
 import Instructions from "../components/Instructions.react";
 import { Page, ExerciseParam } from "../constants/Page";
 import PageWrapper from "../components/PageWrapper.react";
-import { Link as RouterLink } from "react-router-dom";
+import RouterLink from "../components/RouterLink.react";
 
 export default class Main extends Component {
   static contextType = SessionContext;
@@ -33,10 +33,7 @@ export default class Main extends Component {
           <>
             <Instructions alwaysShow={true} />
             <Typography>
-              Ready to begin?{" "}
-              <RouterLink to={Page.login.link_path}>
-                <Button component="button">{Page.login.link_text}</Button>
-              </RouterLink>
+              Ready to begin? <RouterLink page={Page.login} />
             </Typography>
           </>
         )}
@@ -44,7 +41,7 @@ export default class Main extends Component {
           <Typography>
             Get started:{" "}
             <RouterLink to={exercise.link_path + ExerciseParam.instructions}>
-              <Button component="button">Exercises / Instructions</Button>
+              Exercises / Instructions
             </RouterLink>
           </Typography>
         )}

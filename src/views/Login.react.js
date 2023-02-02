@@ -5,6 +5,8 @@ import PageWrapper from "../components/PageWrapper.react";
 import LoginButton from "../components/LoginButton.react";
 import LoginGuest from "../components/LoginGuest.react";
 import RouterLink from "../components/RouterLink.react";
+import SessionContext from "../util/SessionContext";
+import { GUEST_ID } from "../constants/Strings";
 
 export default class Login extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ export default class Login extends Component {
       errors: {},
     };
   }
+  static contextType = SessionContext;
 
   handleTextChange = (e) => {
     this.setState({ ...this.state, [e.target.id]: e.target.value });
@@ -65,12 +68,13 @@ export default class Login extends Component {
           setErrors={this.setErrors}
         />
         <Typography mt={1.5}>
-          New user?{" "}
-          <RouterLink to={Page.register.link_path}>
-            {Page.register.link_text}
-          </RouterLink>
+          New user? <RouterLink page={Page.register} />
         </Typography>
-        Or: <LoginGuest />
+        {this.context.session?.userId !== GUEST_ID && (
+          <Typography>
+            Or: <LoginGuest />
+          </Typography>
+        )}
       </PageWrapper>
     );
   }

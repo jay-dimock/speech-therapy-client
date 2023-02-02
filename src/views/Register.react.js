@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-import {
-  Button,
-  FormControl,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { FormControl, Stack, TextField, Typography } from "@mui/material";
 import { Page } from "../constants/Page";
 import PageWrapper from "../components/PageWrapper.react";
 import RegisterButton from "../components/RegisterButton.react";
+import RouterLink from "../components/RouterLink.react";
 
 export default class Register extends Component {
   constructor(props) {
@@ -109,10 +103,7 @@ export default class Register extends Component {
         <RegisterButton newUser={newUser} setErrors={this.setErrors} />
 
         <Typography mt={1.5}>
-          Already registered?{" "}
-          <RouterLink to={Page.login.link_path}>
-            <Button>{Page.login.link_text}</Button>
-          </RouterLink>
+          Already registered? <RouterLink page={Page.login} />
         </Typography>
       </PageWrapper>
     );

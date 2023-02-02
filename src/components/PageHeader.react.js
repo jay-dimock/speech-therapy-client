@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import RouterLink from "./RouterLink.react";
 import {
   AppBar,
-  Button,
   Container,
   MenuItem,
   Stack,
@@ -15,6 +15,14 @@ import { GUEST_ID } from "../constants/Strings";
 
 export default class PageHeader extends Component {
   static contextType = SessionContext;
+
+  userPageKeys = new Set([
+    Page.exercise.key,
+    Page.startexercise.key,
+    Page.editexercise.key,
+    Page.reports.key,
+  ]);
+
   render() {
     const context = this.context;
     const { currentPage } = this.props;
@@ -59,6 +67,10 @@ export default class PageHeader extends Component {
       }
     };
 
+    if (!context.session.userId && this.userPageKeys.has(currentPage.key)) {
+      // user is required to be logged in for these pages.
+      return <Navigate to={Page.login.link_path} />;
+    }
     return (
       <>
         <AppBar position="sticky" color="secondary">
@@ -78,14 +90,19 @@ export default class PageHeader extends Component {
                   >
                     {(page.key === Page.register.key ||
                       page.key === Page.logout.key) && (
-                      <Typography>{context.session.firstName}:</Typography>
+                      <Typography mr={1}>
+                        {context.session.firstName}:
+                      </Typography>
                     )}
-                    <Link
+                    <RouterLink to={page.link_path + page.menu_param}>
+                      {page.link_text}
+                    </RouterLink>
+                    {/* <Link
                       style={{ textDecoration: "none", padding: 0 }}
                       to={page.link_path + page.menu_param}
                     >
                       <Button sx={{ padding: 0 }}>{page.link_text}</Button>
-                    </Link>
+                    </Link> */}
                   </MenuItem>
                 ))}
               </Stack>

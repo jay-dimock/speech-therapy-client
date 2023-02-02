@@ -9,12 +9,7 @@ class LinkButton extends Component {
       }
     };
     return (
-      <Button
-        component="button"
-        size="small"
-        onClick={clickHandler}
-        sx={{ m: 0, p: 0 }}
-      >
+      <Button size="small" onClick={clickHandler} sx={{ m: 0, p: 0 }}>
         <Typography>{this.props.children}</Typography>
       </Button>
     );

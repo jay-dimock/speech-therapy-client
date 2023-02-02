@@ -75,11 +75,7 @@ export default class Instructions extends Component {
               </li>
               <li>
                 To go back and edit the exercise later, you can access it from
-                the{" "}
-                <RouterLink to={Page.reports.link_path}>
-                  {Page.reports.link_text}
-                </RouterLink>{" "}
-                page.{" "}
+                the <RouterLink page={Page.reports} /> page.{" "}
                 <i>
                   You can only edit today's exercises. Earlier dates cannot be
                   modified.

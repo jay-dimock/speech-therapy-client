@@ -5,6 +5,11 @@ export const ExerciseParam = {
   instructions: "/instructions",
 };
 
+export const ReportParam = {
+  alldates: "/alldates",
+  onedate: "/onedate/",
+};
+
 export const Page = {
   home: {
     key: "home",
@@ -60,6 +65,13 @@ export const Page = {
     link_text: "Reports",
     route_path: "reports",
     link_path: "/reports",
+    menu_param: "",
+  },
+  report: {
+    key: "report",
+    link_text: "Report",
+    route_path: "reports/:report/:param",
+    link_path: "/report",
     menu_param: "",
   },
 };

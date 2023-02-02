@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import AxiosErrors from "../util/AxiosErrors";
 import SessionContext from "../util/SessionContext";
+import { GUEST_ID } from "../constants/Strings";
 
 export default class RegisterButton extends Component {
   static contextType = SessionContext;
@@ -30,13 +31,13 @@ export default class RegisterButton extends Component {
         });
     };
 
-    if (this.context.session.userId) {
+    if (session.userId && session.userId !== GUEST_ID) {
       return <Navigate to="/" />;
     }
 
     return (
       <Button sx={{ py: 1 }} variant="contained" onClick={clickHandler}>
-        Register
+        <Typography>Register</Typography>
       </Button>
     );
   }

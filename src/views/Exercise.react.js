@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Typography } from "@mui/material";
-import { Link as RLink, Navigate, useParams } from "react-router-dom";
+import { Link as RLink, useParams } from "react-router-dom";
 import SessionContext from "../util/SessionContext";
 import PageWrapper from "../components/PageWrapper.react";
 import Instructions from "../components/Instructions.react";
@@ -18,12 +18,7 @@ class Exercise extends Component {
   static contextType = SessionContext;
   render() {
     const context = this.context;
-    if (!context.session.userId) {
-      return <Navigate to={Page.login.link_path} />;
-    }
-
     const param = this.props.params.param;
-
     const restart = param === "restart";
     const notallowed = param === "notallowed";
     const buttonText =
@@ -66,10 +61,8 @@ class Exercise extends Component {
             when the exercise is finished, you'll be taken back to this page
             without the chance to view or edit your results. For a better
             experience, please
-            <RouterLink to={Page.login.link_path}>
-              {Page.login.link_text}.
-            </RouterLink>{" "}
-            Your personal information will not be shared with anyone.
+            <RouterLink page={Page.login} />. Your personal information will not
+            be shared with anyone.
           </Typography>
         )}
         <Instructions show={param === ExerciseParam.instructions} />
