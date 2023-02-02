@@ -8,13 +8,12 @@ export default class PageWrapper extends Component {
     return (
       <>
         <PageHeader currentPage={page} />
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ textAlign: "center" }}>
           <Typography variant="h5" my={1}>
             {page?.link_text}
           </Typography>
           {children}
         </Container>
-        {this.children}
       </>
     );
   }

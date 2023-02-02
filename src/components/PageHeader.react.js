@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import RouterLink from "./RouterLink.react";
 import {
   AppBar,
+  Box,
   Container,
   MenuItem,
   Stack,
@@ -12,6 +13,7 @@ import {
 import { Page } from "../constants/Page";
 import SessionContext from "../util/SessionContext";
 import { GUEST_ID } from "../constants/Strings";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 
 export default class PageHeader extends Component {
   static contextType = SessionContext;
@@ -27,6 +29,14 @@ export default class PageHeader extends Component {
     const context = this.context;
     const { currentPage } = this.props;
     const loggedIn = !!context.session.userId;
+
+    if (!context.session.userId && this.userPageKeys.has(currentPage.key)) {
+      // user is required to be logged in for these pages.
+      return <Navigate to={Page.login.link_path} />;
+    }
+
+    const isGuest = context.session.userId === GUEST_ID;
+
     const pages = [];
     pages.push({ ...Page.home, disabled: currentPage.key === Page.home.key });
 
@@ -44,7 +54,7 @@ export default class PageHeader extends Component {
         ...Page.reports,
         disabled: currentPage.key === Page.reports.key,
       });
-      if (context.session.userId === GUEST_ID) {
+      if (isGuest) {
         pages.push({
           ...Page.register,
           disabled: currentPage.key === Page.register.key,
@@ -67,20 +77,36 @@ export default class PageHeader extends Component {
       }
     };
 
-    if (!context.session.userId && this.userPageKeys.has(currentPage.key)) {
-      // user is required to be logged in for these pages.
-      return <Navigate to={Page.login.link_path} />;
-    }
+    const xsShow = { xs: "block", sm: "none" };
+    const xsHide = { xs: "none", sm: "block" };
+    const smHideForGuest = isGuest ? { xs: "none", md: "block" } : "block";
     return (
       <>
-        <AppBar position="sticky" color="secondary">
+        <AppBar position="sticky" elevation={0} sx={{ textAlign: "center" }}>
           <Container maxWidth="xl">
-            <Typography variant="h4">Speech Therapy</Typography>
-            <Toolbar disableGutters>
+            <Box
+              display="block"
+              sx={{ mt: 2, mx: "auto", display: "inline-block" }}
+            >
+              <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
+                <RecordVoiceOverIcon
+                  fontSize={"large"}
+                  color="secondary"
+                  sx={{ display: xsHide }}
+                />
+                <Typography fontSize={"2em"} color="secondary">
+                  Speech Therapy
+                </Typography>
+              </Stack>
+            </Box>
+            <Toolbar
+            // disableGutters
+            // if disabled, menu will align left instead of center
+            >
               <Stack
-                width="100%"
                 spacing={1}
                 direction={{ xs: "column", sm: "row" }}
+                sx={{ mx: "auto" }}
               >
                 {pages.map((page) => (
                   <MenuItem
@@ -90,19 +116,25 @@ export default class PageHeader extends Component {
                   >
                     {(page.key === Page.register.key ||
                       page.key === Page.logout.key) && (
-                      <Typography mr={1}>
+                      <Typography mr={1} color="secondary">
                         {context.session.firstName}:
                       </Typography>
                     )}
-                    <RouterLink to={page.link_path + page.menu_param}>
-                      {page.link_text}
-                    </RouterLink>
-                    {/* <Link
-                      style={{ textDecoration: "none", padding: 0 }}
+                    {/* <RouterLink to={page.link_path + page.menu_param}>
+                      <span color="white">{page.link_text}</span>
+                    </RouterLink> */}
+                    <RouterLink
+                      sx={{
+                        color: "#ffffff",
+                        display:
+                          page.key === Page.login.key
+                            ? smHideForGuest
+                            : "block",
+                      }}
                       to={page.link_path + page.menu_param}
                     >
-                      <Button sx={{ padding: 0 }}>{page.link_text}</Button>
-                    </Link> */}
+                      {page.link_text}
+                    </RouterLink>
                   </MenuItem>
                 ))}
               </Stack>

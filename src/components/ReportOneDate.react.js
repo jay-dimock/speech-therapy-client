@@ -70,7 +70,9 @@ class ReportOneDate extends Component {
     ).toDateString();
     return (
       <>
-        <h3>{isToday ? "Today's Activity" : "Activity for " + friendlyDate}</h3>
+        <Typography variant="h6">
+          {isToday ? "Today's Activity" : "Activity for " + friendlyDate}
+        </Typography>
         {!isToday && (
           <Typography>
             Editing is only possible for exercises performed on today's date.
@@ -91,13 +93,12 @@ class ReportOneDate extends Component {
             {data.map((d, i) => {
               return (
                 <TableRow key={i} style={{ verticalAlign: "top" }}>
+                  <TableCell>{d.category}</TableCell>
                   <TableCell>
-                    {d.category}
-                    <br />
-                  </TableCell>
-                  <TableCell>
-                    <u>{d.words.length} words</u>:{" "}
-                    <span>{d.words.join(", ")}</span>
+                    <b>
+                      {d.words.length} WORD{d.words.length !== 1 && "S"}
+                    </b>
+                    : <span>{d.words.join(", ")}</span>
                   </TableCell>
                   {isToday && (
                     <TableCell>

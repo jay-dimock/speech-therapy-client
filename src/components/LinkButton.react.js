@@ -8,8 +8,9 @@ class LinkButton extends Component {
         this.props.onClick();
       }
     };
+    const sx = this.props.sx ?? { m: 0, p: 0 };
     return (
-      <Button size="small" onClick={clickHandler} sx={{ m: 0, p: 0 }}>
+      <Button size="small" onClick={clickHandler} sx={sx}>
         <Typography>{this.props.children}</Typography>
       </Button>
     );

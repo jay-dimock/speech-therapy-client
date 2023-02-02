@@ -36,7 +36,7 @@ export default class Login extends Component {
           spacing={2}
           direction={"column"}
           width={{ xs: "100%", sm: "500px" }}
-          sx={{ my: 2 }}
+          sx={{ my: 2, mx: "auto" }}
         >
           <FormControl>
             <TextField

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Box, Link } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import RouterLink from "../components/RouterLink.react";
 import { Page } from "../constants/Page";
 
@@ -16,18 +16,22 @@ export default class Instructions extends Component {
   render() {
     const show = this.state.show;
     return (
-      <Box>
+      <Box sx={{ textAlign: "left" }}>
         {show && <h2 style={{ marginBottom: "0" }}>Instructions</h2>}
         {!show && <div style={{ marginTop: "20px" }}></div>}
 
         {!this.props.alwaysShow && (
-          <Link
-            style={{ marginBottom: "0.5rem" }}
-            component="button"
-            onClick={this.toggleShow}
-          >
-            {show ? "Hide Instructions" : "Instructions"}
-          </Link>
+          <Box sx={{ width: "100%", textAlign: show ? "left" : "center" }}>
+            <Link
+              style={{ marginBottom: "0.5rem" }}
+              component="button"
+              onClick={this.toggleShow}
+            >
+              <Typography>
+                {show ? "Hide Instructions" : "Instructions"}
+              </Typography>
+            </Link>
+          </Box>
         )}
 
         {show && (

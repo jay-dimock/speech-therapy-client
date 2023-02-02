@@ -15,7 +15,7 @@ import AxiosErrors from "../util/AxiosErrors";
 class ReportAllDates extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = { data: null };
   }
   static contextType = SessionContext;
   componentDidMount() {
@@ -27,9 +27,7 @@ class ReportAllDates extends Component {
     axios
       .get(endpoint)
       .then((res) => {
-        //console.log(res.data);
         this.setState({ data: res.data });
-        //setLoaded(true);
       })
       .catch((err) => {
         AxiosErrors(err);
@@ -37,23 +35,27 @@ class ReportAllDates extends Component {
   }
   render() {
     const { data } = this.state;
+    if (!data) {
+      return;
+    }
     return (
       <>
         {data.length === 0 && (
           <>
-            <h3>No Exercises Found</h3>
-            <p>
+            <Typography variant="h6">No Exercises Found</Typography>
+            <Typography>
               No exercises were found for this user in the database.
-              <br />
+            </Typography>
+            <Typography>
               Make sure you are logged in and have completed at least one
               exercise.
-            </p>
+            </Typography>
           </>
         )}
 
         {data.length > 0 && (
           <>
-            <h3>Summary: Activity by Date</h3>
+            <Typography variant="h6">Summary: Activity by Date</Typography>
             <Table style={{ maxWidth: 400, margin: "0 auto" }} size="small">
               <TableHead>
                 <TableRow>

@@ -14,7 +14,8 @@ import Exercise from "./views/Exercise.react";
 import StartExercise from "./views/StartExercise.react";
 import EditExercise from "./views/EditExercise.react";
 import Reports from "./views/Reports.react";
-
+// import { PRIMARY, SECONDARY } from "./constants/Colors";
+import { teal, amber } from "@mui/material/colors";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +30,8 @@ export default class App extends Component {
 
   theme = createTheme({
     palette: {
-      primary: { main: "#28a745" },
-      secondary: { main: "#000000" },
+      primary: { main: teal[500] },
+      secondary: { main: amber["A400"] },
     },
   });
 

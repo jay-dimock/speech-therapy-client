@@ -7,9 +7,10 @@ class RouterLink extends Component {
     const page = this.props.page;
     const to = page ? page.link_path : this.props.to;
     const children = page ? page.link_text : this.props.children;
+    const sx = this.props.sx ?? null;
     return (
       <RLink to={to}>
-        <LinkButton>{children}</LinkButton>
+        <LinkButton sx={sx}>{children}</LinkButton>
       </RLink>
     );
   }

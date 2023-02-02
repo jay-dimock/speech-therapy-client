@@ -51,7 +51,7 @@ class Exercise extends Component {
           </>
         )}
         <RLink to={Page.startexercise.link_path}>
-          <Button variant="contained">
+          <Button variant="contained" sx={{ mt: 2 }}>
             <Typography>{buttonText}</Typography>
           </Button>
         </RLink>

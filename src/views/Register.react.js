@@ -40,7 +40,7 @@ export default class Register extends Component {
           spacing={2}
           direction={"column"}
           width={{ xs: "100%", sm: "500px" }}
-          sx={{ my: 1 }}
+          sx={{ my: 2, mx: "auto" }}
         >
           <FormControl>
             <TextField
