@@ -38,7 +38,7 @@ export default class Main extends Component {
           </>
         )}
         {this.context.session.userId && (
-          <Typography>
+          <Typography mt={1}>
             Get started:{" "}
             <RouterLink to={exercise.link_path + ExerciseParam.instructions}>
               Exercises / Instructions

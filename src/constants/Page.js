@@ -71,7 +71,7 @@ export const Page = {
     key: "report",
     link_text: "Report",
     route_path: "reports/:report/:param",
-    link_path: "/report",
+    link_path: "/reports",
     menu_param: "",
   },
 };

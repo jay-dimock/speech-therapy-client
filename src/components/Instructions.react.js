@@ -21,7 +21,12 @@ export default class Instructions extends Component {
         {!show && <div style={{ marginTop: "20px" }}></div>}
 
         {!this.props.alwaysShow && (
-          <Box sx={{ width: "100%", textAlign: show ? "left" : "center" }}>
+          <Box
+            sx={{
+              width: "100%",
+              textAlign: show ? "left" : { xs: "left", sm: "center" },
+            }}
+          >
             <Link
               style={{ marginBottom: "0.5rem" }}
               component="button"

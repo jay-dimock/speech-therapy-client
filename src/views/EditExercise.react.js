@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
 import { Button, Link, Typography } from "@mui/material";
-import { FlipToFront } from "@mui/icons-material";
+import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
 import SessionContext from "../util/SessionContext";
 import PageWrapper from "../components/PageWrapper.react";
 import { Page } from "../constants/Page";
-import EditWords from "../components/EditWords";
+import EditWords from "../components/EditWords.react";
 import AxiosErrors from "../util/AxiosErrors";
-import DeleteWord from "../components/DeleteWord";
+import DeleteWord from "../components/DeleteWord.react";
 
 class EditExercise extends Component {
   constructor(props) {
@@ -66,28 +66,35 @@ class EditExercise extends Component {
 
     const exerciseId = this.props.params.id;
     return (
-      <PageWrapper page={Page.editexercise}>
-        <Typography variant="h4">Category: {category}</Typography>
-        <Button variant="contained" onClick={startOverClickHandler}>
+      <PageWrapper page={Page.editexercise} responsive={false}>
+        <Typography variant="h5">Category: {category}</Typography>
+        <Button
+          variant="contained"
+          onClick={startOverClickHandler}
+          sx={{ my: 1 }}
+        >
           Start New Exercise
         </Button>
         <Typography variant="h6">
           You recorded <b>{words.length} words!</b>
         </Typography>
         <Link mb={1} component="button" onClick={toggleInstructions}>
-          {showInstructions ? "Hide Instructions" : "Editing Instructions"}
+          <Typography>
+            {showInstructions ? "Hide Instructions" : "Editing Instructions"}
+          </Typography>
         </Link>
         {showInstructions && (
           <>
-            <Typography>
-              To edit a word, by typing over it (if you back-space over it, the
-              word will be deleted).
+            <Typography my={1}>
+              To edit a word, type over it (if you back-space over it, the word
+              will be deleted).
             </Typography>
-            <Typography>
+            <Typography my={1}>
               To combine 2 words, drag one word on top of the other using the
-              drag symbol <FlipToFront style={dragIconStyle} color="primary" />.
+              drag symbol{" "}
+              <FlipToFrontIcon style={dragIconStyle} color="primary" />.
             </Typography>
-            <Typography>
+            <Typography my={1}>
               To delete a word, by click the delete symbol:{" "}
               <DeleteWord action={() => false} />, or back-space over the entire
               word.

@@ -9,8 +9,12 @@ import {
   TableCell,
   Typography,
 } from "@mui/material";
-import RouterLink from "./RouterLink.react";
+
 import AxiosErrors from "../util/AxiosErrors";
+// import PageviewIcon from "@mui/icons-material/Pageview";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Link as RLink } from "react-router-dom";
+import { Page, ReportParam } from "../constants/Page";
 
 class ReportAllDates extends Component {
   constructor(props) {
@@ -27,7 +31,11 @@ class ReportAllDates extends Component {
     axios
       .get(endpoint)
       .then((res) => {
-        this.setState({ data: res.data });
+        this.setState({
+          data: res.data.sort((a, b) =>
+            a._id > b._id ? -1 : b._id > a._id ? 1 : 0
+          ),
+        });
       })
       .catch((err) => {
         AxiosErrors(err);
@@ -56,12 +64,12 @@ class ReportAllDates extends Component {
         {data.length > 0 && (
           <>
             <Typography variant="h6">Summary: Activity by Date</Typography>
-            <Table style={{ maxWidth: 400, margin: "0 auto" }} size="small">
+            <Table sx={{ maxWidth: "sm", mx: "auto", mt: 2 }} size="small">
               <TableHead>
                 <TableRow>
                   <TableCell>Date</TableCell>
-                  <TableCell>Exercises</TableCell>
-                  <TableCell>Action</TableCell>
+                  <TableCell sx={{ pl: 0 }}>Exercises</TableCell>
+                  <TableCell sx={{ px: 0 }}>View Detail</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -70,10 +78,15 @@ class ReportAllDates extends Component {
                     <TableRow key={i}>
                       <TableCell>{d._id}</TableCell>
                       <TableCell>{d.sum}</TableCell>
-                      <TableCell>
-                        <RouterLink to={"/reports/onedate/" + d._id}>
-                          View Exercises
-                        </RouterLink>
+                      <TableCell sx={{ px: 0 }}>
+                        <RLink
+                          to={
+                            Page.report.link_path + ReportParam.onedate + d._id
+                          }
+                        >
+                          {/* <PageviewIcon color="primary" fontSize="large" /> */}
+                          <VisibilityIcon color="primary" fontSize="large" />
+                        </RLink>
                       </TableCell>
                     </TableRow>
                   );

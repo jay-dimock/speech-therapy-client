@@ -5,7 +5,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import AxiosErrors from "../util/AxiosErrors";
-import WordDraggable from "../components/WordDraggable";
+import WordDraggable from "./WordDraggable";
 import { Page } from "../constants/Page";
 
 const isTouchDevice = "ontouchstart" in window;

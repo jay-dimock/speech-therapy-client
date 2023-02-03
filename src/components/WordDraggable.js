@@ -3,9 +3,9 @@ import { useDrag, useDrop } from "react-dnd";
 import axios from "axios";
 import ContentEditable from "react-contenteditable";
 import { Paper } from "@mui/material";
-import { FlipToFront } from "@mui/icons-material";
+import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
 import AxiosErrors from "../util/AxiosErrors";
-import DeleteWord from "./DeleteWord";
+import DeleteWord from "./DeleteWord.react";
 
 const WordDraggable = (props) => {
   const { exerciseId, index, deleteWord, isTouchDevice } = props;
@@ -93,14 +93,16 @@ const WordDraggable = (props) => {
     display: "inline-block",
     border: "1px solid lightgray",
     borderRadius: "6px",
-    padding: isTouchDevice ? "5px 10px" : "4px 8px",
-    margin: isTouchDevice ? "10px 10px" : "7px 8px",
+    padding: "4px 8px",
+    margin: "7px 8px",
     opacity: isDragging ? 0.25 : 1,
   };
 
   const contentStyle = {
     display: "inline-block",
-    marginLeft: isTouchDevice ? "10px" : "5px",
+    marginLeft: "5px",
+    paddingLeft: 4,
+    paddingRight: 4,
   };
 
   return (
@@ -114,7 +116,7 @@ const WordDraggable = (props) => {
         onChange={(e) => updateWord(e.target.value.trim())}
       />
 
-      <FlipToFront
+      <FlipToFrontIcon
         style={iconStyle}
         color="primary"
         fontSize={isTouchDevice ? "large" : "small"}

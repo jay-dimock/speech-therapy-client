@@ -1,5 +1,5 @@
 import React from "react";
-import { Clear as ClearIcon } from "@mui/icons-material";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const iconStyle = {
   fontSize: "medium",

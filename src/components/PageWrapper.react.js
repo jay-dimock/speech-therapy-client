@@ -4,12 +4,16 @@ import { Container, Typography } from "@mui/material";
 
 export default class PageWrapper extends Component {
   render() {
-    const { page, children } = this.props;
+    const { page, responsive, children } = this.props;
+    const isResponsive = responsive ?? true;
+    const textAlignment = isResponsive
+      ? { xs: "left", sm: "center" }
+      : "center";
     return (
       <>
         <PageHeader currentPage={page} />
-        <Container maxWidth="xl" sx={{ textAlign: "center" }}>
-          <Typography variant="h5" my={1}>
+        <Container maxWidth="md" sx={{ textAlign: textAlignment }}>
+          <Typography variant="h5" my={1} fontWeight="bold">
             {page?.link_text}
           </Typography>
           {children}

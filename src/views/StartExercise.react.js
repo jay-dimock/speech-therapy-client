@@ -127,7 +127,7 @@ const StartExercise = (props) => {
   }
 
   return (
-    <PageWrapper page={Page.startexercise}>
+    <PageWrapper page={Page.startexercise} responsive={false}>
       {category && (
         <>
           <h4>The category is...</h4>

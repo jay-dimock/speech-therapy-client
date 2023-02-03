@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
-import RouterLink from "./RouterLink.react";
-import {
-  AppBar,
-  Box,
-  Container,
-  MenuItem,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Container } from "@mui/material";
 import { Page } from "../constants/Page";
 import SessionContext from "../util/SessionContext";
 import { GUEST_ID } from "../constants/Strings";
-import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import PageHeaderLarge from "./PageHeaderLarge.react";
+import PageHeaderSmall from "./PageHeaderSmall.react";
 
 export default class PageHeader extends Component {
   static contextType = SessionContext;
@@ -30,7 +22,7 @@ export default class PageHeader extends Component {
     const { currentPage } = this.props;
     const loggedIn = !!context.session.userId;
 
-    if (!context.session.userId && this.userPageKeys.has(currentPage.key)) {
+    if (!loggedIn && this.userPageKeys.has(currentPage.key)) {
       // user is required to be logged in for these pages.
       return <Navigate to={Page.login.link_path} />;
     }
@@ -71,74 +63,23 @@ export default class PageHeader extends Component {
       }
     }
 
-    const followLink = (page) => {
-      if (page.disabled) {
-        return;
-      }
-    };
+    const smallScreen = { xs: "block", sm: "none" };
+    const largeScreen = { xs: "none", sm: "block" };
 
-    const xsShow = { xs: "block", sm: "none" };
-    const xsHide = { xs: "none", sm: "block" };
-    const smHideForGuest = isGuest ? { xs: "none", md: "block" } : "block";
     return (
       <>
-        <AppBar position="sticky" elevation={0} sx={{ textAlign: "center" }}>
-          <Container maxWidth="xl">
-            <Box
-              display="block"
-              sx={{ mt: 2, mx: "auto", display: "inline-block" }}
-            >
-              <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
-                <RecordVoiceOverIcon
-                  fontSize={"large"}
-                  color="secondary"
-                  sx={{ display: xsHide }}
-                />
-                <Typography fontSize={"2em"} color="secondary">
-                  Speech Therapy
-                </Typography>
-              </Stack>
+        <AppBar
+          position="sticky"
+          elevation={0}
+          sx={{ textAlign: { xs: "left", sm: "center" } }}
+        >
+          <Container maxWidth="xl" sx={{ p: 0, m: 0 }}>
+            <Box sx={{ display: smallScreen }}>
+              <PageHeaderSmall pages={pages} />
             </Box>
-            <Toolbar
-            // disableGutters
-            // if disabled, menu will align left instead of center
-            >
-              <Stack
-                spacing={1}
-                direction={{ xs: "column", sm: "row" }}
-                sx={{ mx: "auto" }}
-              >
-                {pages.map((page) => (
-                  <MenuItem
-                    key={page.key}
-                    onClick={() => followLink(page)}
-                    selected={page.disabled}
-                  >
-                    {(page.key === Page.register.key ||
-                      page.key === Page.logout.key) && (
-                      <Typography mr={1} color="secondary">
-                        {context.session.firstName}:
-                      </Typography>
-                    )}
-                    {/* <RouterLink to={page.link_path + page.menu_param}>
-                      <span color="white">{page.link_text}</span>
-                    </RouterLink> */}
-                    <RouterLink
-                      sx={{
-                        color: "#ffffff",
-                        display:
-                          page.key === Page.login.key
-                            ? smHideForGuest
-                            : "block",
-                      }}
-                      to={page.link_path + page.menu_param}
-                    >
-                      {page.link_text}
-                    </RouterLink>
-                  </MenuItem>
-                ))}
-              </Stack>
-            </Toolbar>
+            <Box sx={{ display: largeScreen }}>
+              <PageHeaderLarge pages={pages} />
+            </Box>
           </Container>
         </AppBar>
       </>

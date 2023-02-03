@@ -11,8 +11,9 @@ import {
 } from "@mui/material";
 import RouterLink from "./RouterLink.react";
 import AxiosErrors from "../util/AxiosErrors";
-import { Navigate } from "react-router-dom";
+import { Link as RLink, Navigate } from "react-router-dom";
 import { Page } from "../constants/Page";
+import EditIcon from "@mui/icons-material/Edit";
 
 class ReportOneDate extends Component {
   constructor(props) {
@@ -68,45 +69,47 @@ class ReportOneDate extends Component {
     const friendlyDate = new Date(
       this.reportDateString.replace(/-/g, "/")
     ).toDateString();
+    const smallScreen = { xs: "block", sm: "none" };
+    const largeScreen = { xs: "none", sm: "block" };
     return (
       <>
         <Typography variant="h6">
           {isToday ? "Today's Activity" : "Activity for " + friendlyDate}
         </Typography>
         {!isToday && (
-          <Typography>
+          <Typography mb={1}>
             Editing is only possible for exercises performed on today's date.
           </Typography>
         )}
-        <RouterLink to={Page.reports.link_path}>
-          View activity for another date
-        </RouterLink>
-        <Table style={{ maxWidth: 600, margin: "0 auto" }} size="small">
+        <RouterLink to={Page.reports.link_path}>View another date</RouterLink>
+        <Table sx={{ maxWidth: "sm", mx: "auto", mt: 2 }} size="small">
           <TableHead>
             <TableRow>
               <TableCell>Category</TableCell>
+              {isToday && <TableCell sx={{ px: 0 }}>Edit</TableCell>}
               <TableCell>Words</TableCell>
-              {isToday && <TableCell>Actions</TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map((d, i) => {
               return (
                 <TableRow key={i} style={{ verticalAlign: "top" }}>
-                  <TableCell>{d.category}</TableCell>
+                  <TableCell sx={{ pr: isToday ? 0 : 1 }}>
+                    {d.category}
+                  </TableCell>
+                  {isToday && (
+                    <TableCell sx={{ px: 0 }}>
+                      <RLink to={Page.editexercise.link_path + d._id}>
+                        <EditIcon color="primary" />
+                      </RLink>
+                    </TableCell>
+                  )}
                   <TableCell>
                     <b>
                       {d.words.length} WORD{d.words.length !== 1 && "S"}
                     </b>
                     : <span>{d.words.join(", ")}</span>
                   </TableCell>
-                  {isToday && (
-                    <TableCell>
-                      <RouterLink to={Page.editexercise.link_path + d._id}>
-                        Edit
-                      </RouterLink>
-                    </TableCell>
-                  )}
                 </TableRow>
               );
             })}
