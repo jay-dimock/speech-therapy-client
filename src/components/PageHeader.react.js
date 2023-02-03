@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
-import { AppBar, Box, Container } from "@mui/material";
+import { AppBar, Box } from "@mui/material";
 import { Page } from "../constants/Page";
 import SessionContext from "../util/SessionContext";
 import { GUEST_ID } from "../constants/Strings";
@@ -73,14 +73,12 @@ export default class PageHeader extends Component {
           elevation={0}
           sx={{ textAlign: { xs: "left", sm: "center" } }}
         >
-          <Container maxWidth="xl" sx={{ p: 0, m: 0 }}>
-            <Box sx={{ display: smallScreen }}>
-              <PageHeaderSmall pages={pages} />
-            </Box>
-            <Box sx={{ display: largeScreen }}>
-              <PageHeaderLarge pages={pages} />
-            </Box>
-          </Container>
+          <Box sx={{ display: smallScreen }}>
+            <PageHeaderSmall pages={pages} />
+          </Box>
+          <Box sx={{ display: largeScreen }}>
+            <PageHeaderLarge pages={pages} />
+          </Box>
         </AppBar>
       </>
     );

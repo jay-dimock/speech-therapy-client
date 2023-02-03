@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 
 import AxiosErrors from "../util/AxiosErrors";
-// import PageviewIcon from "@mui/icons-material/Pageview";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link as RLink } from "react-router-dom";
 import { Page, ReportParam } from "../constants/Page";
@@ -84,7 +83,6 @@ class ReportAllDates extends Component {
                             Page.report.link_path + ReportParam.onedate + d._id
                           }
                         >
-                          {/* <PageviewIcon color="primary" fontSize="large" /> */}
                           <VisibilityIcon color="primary" fontSize="large" />
                         </RLink>
                       </TableCell>

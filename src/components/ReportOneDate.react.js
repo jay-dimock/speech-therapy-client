@@ -44,7 +44,6 @@ class ReportOneDate extends Component {
     axios
       .get(endpoint)
       .then((res) => {
-        //console.log(res.data);
         if (res.data.length === 0) {
           console.log(
             "No exercises found for " +
@@ -69,8 +68,7 @@ class ReportOneDate extends Component {
     const friendlyDate = new Date(
       this.reportDateString.replace(/-/g, "/")
     ).toDateString();
-    const smallScreen = { xs: "block", sm: "none" };
-    const largeScreen = { xs: "none", sm: "block" };
+
     return (
       <>
         <Typography variant="h6">

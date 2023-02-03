@@ -7,7 +7,7 @@ const AxiosErrors = (err) => {
       return { error: msg };
     } else {
       console.log("err:", err);
-      //console.log(JSON.stringify(err));
+
       return { error: "Unknown Error" };
     }
   }

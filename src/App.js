@@ -14,8 +14,8 @@ import Exercise from "./views/Exercise.react";
 import StartExercise from "./views/StartExercise.react";
 import EditExercise from "./views/EditExercise.react";
 import Reports from "./views/Reports.react";
-// import { PRIMARY, SECONDARY } from "./constants/Colors";
 import { teal, amber } from "@mui/material/colors";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -57,9 +57,6 @@ export default class App extends Component {
               />
               <Route path={Page.reports.route_path} element={<Reports />} />
               <Route path={Page.report.route_path} element={<Reports />} />
-              {/* <EditExercise path="editexercise/:id" />              
-              <Reports path="reports/:report/:param" />  
-              <Reports path="reports" />   */}
             </Routes>
           </Router>
         </SessionContext.Provider>
@@ -67,4 +64,3 @@ export default class App extends Component {
     );
   }
 }
-//export default App;

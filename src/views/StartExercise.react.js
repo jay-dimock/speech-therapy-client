@@ -51,7 +51,6 @@ const StartExercise = (props) => {
   }, []);
 
   useEffect(() => {
-    //console.log("timer useEffect fired. seconds = " + seconds);
     const ticker = setTimeout(() => {
       if (seconds > 0) {
         if (listening) setSeconds(seconds - 1);
@@ -63,7 +62,6 @@ const StartExercise = (props) => {
     return () => {
       //cleanup (will unmount)
       clearTimeout(ticker);
-      //if(listening) stop();
     };
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds]);
@@ -141,9 +139,6 @@ const StartExercise = (props) => {
       )}
     </PageWrapper>
   );
-  //   return <PageWrapper page={Page.startexercise}>
-
-  //   </PageWrapper>;
 };
 
 export default StartExercise;
