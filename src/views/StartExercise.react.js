@@ -69,7 +69,6 @@ const StartExercise = (props) => {
   const setNewCategory = () => {
     const newCat = Categories[Math.floor(Math.random() * Categories.length)];
     if (newCat === context.session.lastCategory) {
-      console.log("Random new category matches last category. Trying again...");
       return setNewCategory();
     }
     if (allowCaps(newCat)) lowercase = false;
@@ -100,7 +99,6 @@ const StartExercise = (props) => {
         transcript: transcript,
       })
       .then((result) => {
-        console.log(result);
         setNavLink(Page.editexercise.link_path + result.data._id);
       })
       .catch((err) => AxiosErrors(err));

@@ -15,7 +15,6 @@ export default class RegisterButton extends Component {
 
     const clickHandler = () => {
       const endpoint = process.env.REACT_APP_API_ENDPOINT + "/user/register";
-      console.log(endpoint);
       axios
         .post(endpoint, newUser)
         .then((res) => {

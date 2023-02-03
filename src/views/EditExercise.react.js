@@ -38,7 +38,7 @@ class EditExercise extends Component {
         });
       })
       .catch((err) => {
-        console.log(AxiosErrors(err));
+        AxiosErrors(err);
       });
   }
 
